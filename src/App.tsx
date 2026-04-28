@@ -1,13 +1,27 @@
 import { useState } from 'react'
 import './App.css'
 
-const products = [
+type Product = {
+  id: number
+  name: string
+  price: number
+  icon: string
+}
+
+type CardProps = {
+  name: string
+  price: number
+  icon: string
+  onAdd: () => void
+}
+
+const products: Product[] = [
   { id: 1, name: "Кросівки", price: 1200, icon: "👟" },
   { id: 2, name: "Куртка",   price: 2400, icon: "🧥" },
   { id: 3, name: "Рюкзак",   price: 890,  icon: "🎒" },
 ]
 
-function Card({ name, price, icon, onAdd }) {
+function Card({ name, price, icon, onAdd }: CardProps) {
   return (
     <div className="card">
       <div className="card-icon">{icon}</div>
@@ -21,9 +35,9 @@ function Card({ name, price, icon, onAdd }) {
 }
 
 function App() {
-  const [cart, setCart] = useState([])
+  const [cart, setCart] = useState<Product[]>([])
 
-  function addToCart(product) {
+  function addToCart(product: Product): void {
     setCart([...cart, product])
   }
 
